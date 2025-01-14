@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HiHome, HiCollection, HiMenu, HiX } from "react-icons/hi";
+import { HiHome, HiCollection, HiMenu, HiX, HiOfficeBuilding } from "react-icons/hi";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -58,6 +58,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                 className="text-sm font-medium"
               >
                 Catalogue des Bières
+              </Link>
+            </li>
+            <li className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-700">
+              <HiOfficeBuilding className="text-xl" />
+              <Link
+                to="/breweries"
+                onClick={handleLinkClick}
+                className="text-sm font-medium"
+              >
+                Liste des Brasseries
               </Link>
             </li>
           </ul>

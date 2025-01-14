@@ -5,6 +5,8 @@ import Sidebar from "./components/sidebar";
 import Home from "./components/home";
 import BeerDetailPage from "./pages/beer/beerDetail";
 import { useState } from "react";
+import BreweriesPage from "./pages/breweries/BreweriesPage";
+import BreweryDetails from "./pages/breweries/BreweryDetails";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -26,6 +28,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/beers" element={<Beers />} />
             <Route path="/beers/:id" element={<BeerDetailPage />} />
+            <Route path="/breweries" element={<BreweriesPage />} />
+            <Route path="/breweries/:id_brewery" element={<BreweryDetails />} />
           </Routes>
         </div>
       </div>

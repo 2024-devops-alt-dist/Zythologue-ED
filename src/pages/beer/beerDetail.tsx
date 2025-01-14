@@ -1,6 +1,7 @@
 import React from "react";
-import BeerDetail from "../../components/BeerDetail";
+
 import { useBeerDetail } from "./hooks/useBeerDetail";
+import BeerDetail from "../../components/beer/beerDetail";
 
 const BeerDetailPage: React.FC = () => {
   const { beer, error, loading } = useBeerDetail();

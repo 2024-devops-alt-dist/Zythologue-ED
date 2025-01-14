@@ -1,6 +1,6 @@
 import React from "react";
-import BeerCard from "../../components/beerCard";
 import { useBeers } from "./hooks/useBeer";
+import BeerCard from "../../components/beer/beerCard";
 
 const Beers: React.FC = () => {
   const {
