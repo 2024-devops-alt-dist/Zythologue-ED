@@ -2,26 +2,30 @@ import { useState, useEffect } from "react";
 import { Brewery } from "../../../response/brewery";
 import { getBreweryById } from "../../../services/brewery/brewerieService";
 
-export const useBreweryDetails = (id: number) => {
+
+export const useBrewery = (breweryId: number | null) => {
   const [brewery, setBrewery] = useState<Brewery | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBrewery = async () => {
-      try {
-        setLoading(true);
-        const data = await getBreweryById(id);
-        setBrewery(data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
+      if (breweryId) {
+        try {
+          const fetchedBrewery = await getBreweryById(breweryId);
+          setBrewery(fetchedBrewery);
+        } catch (err) {
+          setError("Erreur lors de la récupération de la brasserie.");
+        } finally {
+          setLoading(false);
+        }
+      } else {
         setLoading(false);
       }
     };
 
     fetchBrewery();
-  }, [id]);
+  }, [breweryId]);
 
   return { brewery, loading, error };
 };

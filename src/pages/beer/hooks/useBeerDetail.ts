@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Beer } from "../../../response/beer";
-import { fetchBeerById } from "../../../services/beerService";
+import { fetchBeerById } from "../../../services/beer/beerService";
 
 
 export const useBeerDetail = () => {

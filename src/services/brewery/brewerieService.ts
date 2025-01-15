@@ -1,12 +1,9 @@
-import axios from "axios";
-import { Brewery } from "../response/brewery";
-
-const API_URL = import.meta.env.VITE_API_BEER_URL;
-
+import { Brewery } from "../../response/brewery";
+import axiosClient from "../axios/axiosClient";
 
 export const getBreweries = async (): Promise<Brewery[]> => {
   try {
-    const response = await axios.get<Brewery[]>(`${API_URL}/breweries`);
+    const response = await axiosClient.get<Brewery[]>(`/breweries`);
     return response.data;
   } catch (error) {
     console.error("Error fetching breweries:", error);
@@ -16,7 +13,7 @@ export const getBreweries = async (): Promise<Brewery[]> => {
 
 export const getBreweryById = async (id: number): Promise<Brewery> => {
     try {
-      const response = await axios.get<Brewery>(`${API_URL}/breweries/${id}`);
+      const response = await axiosClient.get<Brewery>(`/breweries/${id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching brewery details:", error);

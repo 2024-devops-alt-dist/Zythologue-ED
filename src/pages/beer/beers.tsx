@@ -5,14 +5,12 @@ import BeerCard from "../../components/beer/beerCard";
 const Beers: React.FC = () => {
   const {
     filteredBeers,
+    beers,
     search,
-    minAbv,
-    maxAbv,
     error,
     isLoading,
     handleSearch,
-    handleMinAbvChange,
-    handleMaxAbvChange,
+    handleAbvRangeChange,
   } = useBeers();
 
   return (
@@ -21,30 +19,39 @@ const Beers: React.FC = () => {
         Catalogue des Bières
       </h1>
 
+      {/* Filtres */}
       <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <input
-          type="text"
-          value={search}
-          onChange={handleSearch}
-          placeholder="Rechercher une bière"
+        {/* Recherche par nom avec suggestions */}
+        <div className="relative">
+          <input
+            type="text"
+            value={search}
+            onChange={handleSearch}
+            placeholder="Rechercher une bière"
+            list="beerSuggestions"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+          <datalist id="beerSuggestions">
+            {beers.map((beer) => (
+              <option key={beer.id_beer} value={beer.name} />
+            ))}
+          </datalist>
+        </div>
+
+        {/* Filtre par pourcentage avec plages */}
+        <select
+          onChange={handleAbvRangeChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
-        <input
-          type="number"
-          value={minAbv || ""}
-          onChange={handleMinAbvChange}
-          placeholder="Taux d'alcool minimum (%)"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
-        <input
-          type="number"
-          value={maxAbv || ""}
-          onChange={handleMaxAbvChange}
-          placeholder="Taux d'alcool maximum (%)"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
+        >
+          <option value="">Toutes les plages (%)</option>
+          <option value="0-5">0% - 5%</option>
+          <option value="5-10">5% - 10%</option>
+          <option value="10-15">10% - 15%</option>
+          <option value="15+">15% et plus</option>
+        </select>
       </div>
 
+      {/* Affichage des bières */}
       {error && <p className="text-red-500">{error}</p>}
       {isLoading && <p className="text-gray-500">Chargement des bières...</p>}
 
