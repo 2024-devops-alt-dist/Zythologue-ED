@@ -1,6 +1,6 @@
 import React from "react";
 import { useBeers } from "./hooks/useBeer";
-import BeerCard from "../../components/beer/beerCard";
+import BeerCard from "../../components/beer/beerListCard";
 
 const Beers: React.FC = () => {
   const {
@@ -38,7 +38,7 @@ const Beers: React.FC = () => {
           </datalist>
         </div>
 
-        {/* Filtre par pourcentage avec plages */}
+        {/* Filtre par pourcentage */}
         <select
           onChange={handleAbvRangeChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"

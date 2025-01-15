@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Beer } from "../../response/beer";
+import { Beer } from "../../response/beerResponse";
 import { useBrewery } from "../../pages/beer/hooks/useBrewery";
 import { useBeerIngredients } from "../../pages/beer/hooks/useBeerIngredients";
 

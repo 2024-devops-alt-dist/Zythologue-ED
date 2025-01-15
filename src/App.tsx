@@ -1,12 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Beers from "./pages/beer/beers";
+import Beers from "./pages/beer/beersList";
 import Sidebar from "./components/sidebar";
 import Home from "./components/home";
-import BeerDetailPage from "./pages/beer/beerDetail";
+import BeerDetailPage from "./pages/beer/beerDetailPage";
 import { useState } from "react";
-import BreweriesPage from "./pages/breweries/BreweriesPage";
-import BreweryDetails from "./pages/breweries/BreweryDetails";
+import BreweriesPage from "./pages/breweries/BreweriesListPage";
+import BreweryDetails from "./pages/breweries/BreweryDetailsPage";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

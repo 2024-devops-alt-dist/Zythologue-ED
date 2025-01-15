@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Beer } from "../../../response/beer";
+import { Beer } from "../../../response/beerResponse";
 import { fetchBeers } from "../../../services/beer/beerService";
 
 export const useBeers = () => {

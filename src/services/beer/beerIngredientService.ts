@@ -1,4 +1,4 @@
-import { BeerIngredient } from "../../response/beerIngredient";
+import { BeerIngredient } from "../../response/beerIngredientResponse";
 import axiosClient from "../axios/axiosClient";
 
 

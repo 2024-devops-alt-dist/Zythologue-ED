@@ -1,4 +1,4 @@
-import { Brewery } from "../../response/brewery";
+import { Brewery } from "../../response/breweryResponse";
 import axiosClient from "../axios/axiosClient";
 
 export const getBreweries = async (): Promise<Brewery[]> => {

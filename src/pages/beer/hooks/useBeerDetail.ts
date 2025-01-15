@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Beer } from "../../../response/beer";
+import { Beer } from "../../../response/beerResponse";
 import { fetchBeerById } from "../../../services/beer/beerService";
 
 

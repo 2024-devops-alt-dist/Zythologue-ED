@@ -1,5 +1,5 @@
 import React from "react";
-import { Beer } from "../../response/beer";
+import { Beer } from "../../response/beerResponse";
 import { Link } from "react-router-dom";
 
 interface BeerCardProps {

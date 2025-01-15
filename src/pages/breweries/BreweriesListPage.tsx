@@ -1,6 +1,6 @@
 import React from "react";
 import { useBreweries } from "./hooks/useBreweries";
-import BreweryCard from "../../components/brewery/BreweryCard";
+import BreweryCard from "../../components/brewery/BreweryListCard";
 
 const BreweriesPage: React.FC = () => {
   const { breweries, loading, error } = useBreweries();

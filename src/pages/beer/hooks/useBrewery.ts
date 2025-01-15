@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Brewery } from "../../../response/brewery";
+import { Brewery } from "../../../response/breweryResponse";
 import { getBreweryById } from "../../../services/brewery/brewerieService";
 
 

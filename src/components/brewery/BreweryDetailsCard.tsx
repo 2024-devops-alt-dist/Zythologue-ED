@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Brewery } from "../../response/brewery";
+import { Brewery } from "../../response/breweryResponse";
 import { useBeersByBrewery } from "../../pages/breweries/hooks/useBeersByBrewery";
 
 interface BreweryDetailProps {
@@ -32,7 +32,9 @@ const BreweryDetail: React.FC<BreweryDetailProps> = ({ brewery }) => {
 
         <div className="mb-6">
           <h3 className="text-xl font-semibold">Pays</h3>
-          <p className="text-[#1565C0] text-lg leading-relaxed">{brewery.country}</p>
+          <p className="text-[#1565C0] text-lg leading-relaxed">
+            {brewery.country}
+          </p>
         </div>
 
         <div className="mb-6">
@@ -48,14 +50,18 @@ const BreweryDetail: React.FC<BreweryDetailProps> = ({ brewery }) => {
       </div>
 
       <div className="bg-white mt-8 p-6 rounded-lg shadow-lg max-w-4xl w-full">
-        <h2 className="text-3xl font-bold mb-6 text-[#0D47A1]">Bières associées</h2>
+        <h2 className="text-3xl font-bold mb-6 text-[#0D47A1]">
+          Bières associées
+        </h2>
 
         {loading ? (
           <p className="text-lg text-[#0D47A1]">Chargement des bières...</p>
         ) : error ? (
           <p className="text-lg text-red-500">{error}</p>
         ) : beers.length === 0 ? (
-          <p className="text-lg text-[#0D47A1]">Aucune bière associée trouvée.</p>
+          <p className="text-lg text-[#0D47A1]">
+            Aucune bière associée trouvée.
+          </p>
         ) : (
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {beers.map((beer) => (
@@ -63,7 +69,9 @@ const BreweryDetail: React.FC<BreweryDetailProps> = ({ brewery }) => {
                 key={beer.id_beer}
                 className="bg-[#BBDEFB] p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
               >
-                <h3 className="text-xl font-semibold text-[#0D47A1]">{beer.name}</h3>
+                <h3 className="text-xl font-semibold text-[#0D47A1]">
+                  {beer.name}
+                </h3>
                 <p className="text-[#1565C0] text-sm mt-2">
                   {beer.description || "Pas de description disponible."}
                 </p>
