@@ -8,12 +8,20 @@ import BeerDetailPage from "./pages/beer/beerDetailPage";
 import { useState } from "react";
 import BreweriesPage from "./pages/breweries/BreweriesListPage";
 import BreweryDetails from "./pages/breweries/BreweryDetailsPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Dashboard from "./pages/admin/Dashboard";
+import { UserProvider } from "./pages/admin/context/UserContext";
+import LoginPage from "./pages/admin/LoginPage";
+import Unauthorized from "./pages/admin/Unauthorized";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   const location = useLocation();
+
+  const hideSidebarOn = ["/dashboard", "/login", "/unauthorized"];
+  const shouldHideSidebar = hideSidebarOn.includes(location.pathname);
 
   const pageVariants = {
     initial: {
@@ -45,80 +53,129 @@ function App() {
   };
 
   return (
-    <div className="relative flex bg-gradient-to-br from-blue-900 via-gray-900 to-black min-h-screen">
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex-1 transition-all duration-300 overflow-auto">
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route
-              path="/"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageVariants}
-                >
-                  <Home />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/beers"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageVariants}
-                >
-                  <Beers />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/beers/:id"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageVariants}
-                >
-                  <BeerDetailPage />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/breweries"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageVariants}
-                >
-                  <BreweriesPage />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/breweries/:id_brewery"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={pageVariants}
-                >
-                  <BreweryDetails />
-                </motion.div>
-              }
-            />
-          </Routes>
-        </AnimatePresence>
+    <UserProvider>
+      <div className="relative flex bg-gradient-to-br from-blue-900 via-gray-900 to-black min-h-screen">
+        {!shouldHideSidebar && (
+          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        )}
+        <div
+          className={`flex-1 transition-all duration-300 overflow-auto ${
+            shouldHideSidebar ? "w-full" : ""
+          }`}
+        >
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route
+                path="/"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <Home />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/beers"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <Beers />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/beers/:id"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <BeerDetailPage />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/breweries"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <BreweriesPage />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/breweries/:id_brewery"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <BreweryDetails />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <LoginPage />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <motion.div
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      variants={pageVariants}
+                    >
+                      <Dashboard />
+                    </motion.div>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/unauthorized"
+                element={
+                  <motion.div
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={pageVariants}
+                  >
+                    <Unauthorized />
+                  </motion.div>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </UserProvider>
   );
 }
 
