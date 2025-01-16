@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 const Unauthorized: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate("/");
+  const handleGoBackLogin = () => {
+    navigate("/login");
   };
 
   return (
@@ -15,10 +15,10 @@ const Unauthorized: React.FC = () => {
         Vous n'avez pas l'autorisation d'accéder à cette page.
       </p>
       <button
-        onClick={handleGoBack}
+        onClick={handleGoBackLogin}
         className="mt-6 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
       >
-        Retour à l'accueil
+        Retour au login
       </button>
     </div>
   );

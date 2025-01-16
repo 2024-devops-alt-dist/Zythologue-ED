@@ -3,7 +3,7 @@ import { Category } from '../../response/categoryResponse';
 import axiosClient from '../axios/axiosClient';
 
 
-export const fetchCategories = async (): Promise<Category[]> => {
+export const getCategories = async (): Promise<Category[]> => {
     try {
         const response = await axiosClient.get<Category[]>('/categories');
         return response.data;
@@ -13,7 +13,7 @@ export const fetchCategories = async (): Promise<Category[]> => {
     }
 };
 
-export const fetchCategoryById = async (id: number): Promise<Category> => {
+export const getCategoryById = async (id: number): Promise<Category> => {
     try {
         const response = await axiosClient.get<Category>(`/categories/${id}`);
         return response.data;

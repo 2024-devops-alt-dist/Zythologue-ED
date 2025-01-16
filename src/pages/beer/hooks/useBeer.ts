@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Beer } from "../../../response/beerResponse";
-import { fetchBeers } from "../../../services/beer/beerService";
+import { getBeers } from "../../../services/beer/beerService";
 
 export const useBeers = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
@@ -12,7 +12,7 @@ export const useBeers = () => {
   useEffect(() => {
     const loadBeers = async () => {
       try {
-        const data = await fetchBeers();
+        const data = await getBeers();
         const parsedData = data.map((beer: any) => ({
           ...beer,
           abv: parseFloat(beer.abv),

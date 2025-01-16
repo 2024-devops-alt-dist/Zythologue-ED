@@ -10,9 +10,9 @@ import BreweriesPage from "./pages/breweries/BreweriesListPage";
 import BreweryDetails from "./pages/breweries/BreweryDetailsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/admin/Dashboard";
-import { UserProvider } from "./pages/admin/context/UserContext";
-import LoginPage from "./pages/admin/LoginPage";
 import Unauthorized from "./pages/admin/Unauthorized";
+import { UserProvider } from "./context/UserContext";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

@@ -2,7 +2,7 @@ import { Ingredient } from '../../response/ingredientResponse';
 import axiosClient from '../axios/axiosClient';
 
 
-export const fetchIngredients = async (): Promise<Ingredient[]> => {
+export const getIngredients = async (): Promise<Ingredient[]> => {
   try {
     const response = await axiosClient.get<Ingredient[]>('/ingredients');
     return response.data;

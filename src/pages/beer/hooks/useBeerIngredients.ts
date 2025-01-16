@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchBeerIngredients } from "../../../services/beer/beerIngredientService";
-import { fetchIngredients } from "../../../services/ingredient/ingredientService";
+import { getIngredients } from "../../../services/ingredient/ingredientService";
 
 
 interface DetailedIngredient {
@@ -21,7 +21,7 @@ export const useBeerIngredients = (beerId: number) => {
         const beerIngredients = await fetchBeerIngredients(beerId); // Ce fetch doit filtrer uniquement par beer_id
 
         // Étape 2 : Récupérer les détails des ingrédients
-        const allIngredients = await fetchIngredients();
+        const allIngredients = await getIngredients();
 
         // Étape 3 : Filtrer et croiser les données pour ne garder que les ingrédients de la bière
         const detailedIngredients = beerIngredients

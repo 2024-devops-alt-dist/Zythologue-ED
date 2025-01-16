@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useUser } from "../pages/admin/context/UserContext";
+import { useUser } from "../context/UserContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;

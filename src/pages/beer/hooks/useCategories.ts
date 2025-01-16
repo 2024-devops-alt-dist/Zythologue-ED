@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchCategories } from "../../../services/categories/categorieService";
+import { getCategories } from "../../../services/categories/categorieService";
 
 interface Category {
   id_category: number;
@@ -15,7 +15,7 @@ export const useCategories = () => {
     const fetchAllCategories = async () => {
       try {
         setLoading(true);
-        const data = await fetchCategories();
+        const data = await getCategories();
         setCategories(data);
       } catch (err: any) {
         console.error("Erreur lors de la récupération des catégories :", err);

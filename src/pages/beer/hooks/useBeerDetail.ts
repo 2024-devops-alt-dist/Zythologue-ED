@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Beer } from "../../../response/beerResponse";
-import { fetchBeerById } from "../../../services/beer/beerService";
+import { getBeerById } from "../../../services/beer/beerService";
 
 
 export const useBeerDetail = () => {
@@ -20,7 +20,7 @@ export const useBeerDetail = () => {
       }
 
       try {
-        const data = await fetchBeerById(parseInt(id, 10));
+        const data = await getBeerById(parseInt(id, 10));
         setBeer(data);
       } catch (err) {
         setError("Erreur lors du chargement de la bière.");
