@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="relative flex">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex-1 p-4 bg-gray-100 transition-all duration-300">
+      <div className="flex-1 p-4 bg-gray-100 transition-all duration-300 overflow-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/beers" element={<Beers />} />

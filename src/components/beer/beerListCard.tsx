@@ -15,7 +15,7 @@ const BeerCard: React.FC<BeerCardProps> = ({ beer }) => {
   });
 
   return (
-    <div className="relative flex flex-col max-w-xs overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-blue-100 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1 transform duration-300">
+    <div className="relative flex flex-col max-w-xs overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 transform duration-300">
       {/* Image Section */}
       <div className="relative overflow-hidden group">
         <img
@@ -23,6 +23,10 @@ const BeerCard: React.FC<BeerCardProps> = ({ beer }) => {
           alt={beer.name}
           className="w-full h-48 object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-300"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <p className="absolute bottom-4 left-4 text-white text-sm font-medium bg-blue-600 bg-opacity-75 px-2 py-1 rounded-md group-hover:bg-blue-700 transition-all duration-300">
+          {beer.abv}% ABV
+        </p>
       </div>
 
       {/* Content Section */}
@@ -47,7 +51,7 @@ const BeerCard: React.FC<BeerCardProps> = ({ beer }) => {
         </div>
         <Link
           to={`/beers/${beer.id_beer}`}
-          className="text-sm text-white bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition duration-300"
+          className="text-sm text-white bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition duration-300 whitespace-nowrap"
         >
           Voir les détails
         </Link>

@@ -38,9 +38,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       )}
 
       <div
-        className={`fixed inset-y-0 bg-gray-800 text-white max-w-full transform transition-transform duration-300 z-30 ${
+        className={`fixed inset-y-0 left-0 bg-gray-800 text-white w-64  transform transition-transform duration-300 z-30 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:relative lg:w-64`}
+        } lg:translate-x-0 lg:relative`}
       >
         <div className="p-4 text-xl font-bold border-b border-gray-700 flex items-center space-x-2">
           <FaBeer className="text-3xl text-yellow-500" />

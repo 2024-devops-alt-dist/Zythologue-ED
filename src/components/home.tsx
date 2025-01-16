@@ -8,33 +8,54 @@ const Home: React.FC = () => {
     navigate("/beers");
   };
 
+  const handleViewBreweries = () => {
+    navigate("/breweries");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-gray-600 text-white py-10">
+      <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-10 shadow-lg">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold text-center">
+          <h1 className="text-5xl font-extrabold text-center">
             Bienvenue sur le Catalogue des Bières
           </h1>
-          <p className="text-lg text-center mt-4">
-            Découvrez notre sélection de bières artisanales du monde entier.
+          <p className="text-xl text-center mt-4">
+            Découvrez notre sélection de bières artisanales et de brasseries du monde entier.
           </p>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-10 text-center">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-          Explorez notre collection unique
+        <h2 className="text-4xl font-semibold text-gray-800 mb-8">
+          Explorez nos catégories
         </h2>
-        <p className="text-lg text-gray-600 mb-6">
-          Cliquez sur le bouton ci-dessous pour consulter notre catalogue de
-          bières.
-        </p>
-        <button
-          onClick={handleViewBeers}
-          className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold text-lg rounded-lg shadow-md hover:shadow-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300"
-        >
-          Voir le Catalogue des Bières
-        </button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+            <h3 className="text-2xl font-bold text-blue-600 mb-4">Catalogue des Bières</h3>
+            <p className="text-gray-600 mb-6">
+              Plongez dans notre collection de bières artisanales et découvrez des saveurs uniques.
+            </p>
+            <button
+              onClick={handleViewBeers}
+              className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-teal-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-300"
+            >
+              Voir le Catalogue des Bières
+            </button>
+          </div>
+
+          <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+            <h3 className="text-2xl font-bold text-purple-600 mb-4">Liste des Brasseries</h3>
+            <p className="text-gray-600 mb-6">
+              Découvrez les brasseries locales et internationales qui produisent des bières exceptionnelles.
+            </p>
+            <button
+              onClick={handleViewBreweries}
+              className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-600 text-white font-semibold rounded-lg shadow-md hover:from-yellow-600 hover:to-orange-700 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-300"
+            >
+              Voir les Brasseries
+            </button>
+          </div>
+        </div>
       </main>
     </div>
   );
