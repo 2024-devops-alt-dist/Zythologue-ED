@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Beer } from "../../response/beerResponse";
 import { useBrewery } from "../../pages/beer/hooks/useBrewery";
 import { useBeerIngredients } from "../../pages/beer/hooks/useBeerIngredients";
+import { useCategories } from "../../pages/beer/hooks/useCategories";
+import beersImage from "../../assets/beerDetail.jpg";
 
 interface BeerDetailProps {
   beer: Beer;
@@ -20,6 +22,15 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
     loading: ingredientsLoading,
     error: ingredientsError,
   } = useBeerIngredients(beer.id_beer);
+  const {
+    categories,
+    loading: categoriesLoading,
+    error: categoriesError,
+  } = useCategories();
+
+  const categoryName = categories.find(
+    (category) => category.id_category === beer.category_id
+  )?.name;
 
   const handleNavigateToBrewery = () => {
     if (brewery) {
@@ -28,91 +39,102 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF8E1] flex flex-col items-center py-10 px-4">
-      <div className="bg-[#FFC107] text-[#4E342E] w-full py-8 rounded-lg shadow-md text-center">
-        <h1 className="text-4xl font-bold">{beer.name}</h1>
-        <p className="text-lg mt-2 font-medium">
-          Une bière exceptionnelle à savourer
-        </p>
-      </div>
-
-      <div className="bg-[#FFE0B2] mt-8 p-6 rounded-lg shadow-lg max-w-4xl w-full text-[#4E342E]">
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-3">Description</h2>
-          <p className="text-[#6D4C41] text-lg">{beer.description}</p>
-        </div>
-
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-3">Taux d'alcool</h2>
-          <p className="text-[#6D4C41] text-lg">
-            <span className="font-medium">{beer.abv}%</span>
-          </p>
-        </div>
-
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-3">Brasserie</h2>
-          {breweryLoading ? (
-            <p className="text-[#6D4C41] text-lg">
-              Chargement des informations...
-            </p>
-          ) : breweryError ? (
-            <p className="text-red-600 text-lg">{breweryError}</p>
-          ) : brewery ? (
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <span className="text-lg text-[#6D4C41] font-medium">
-                {brewery.name}
-              </span>
-              <button
-                onClick={handleNavigateToBrewery}
-                className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
-              >
-                Voir la brasserie
-              </button>
+    <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black min-h-screen py-10 transition-all duration-300">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row -mx-4">
+          {/* Section Image */}
+          <div className="md:flex-1 px-4">
+            <div className="h-[460px] rounded-lg overflow-hidden shadow-lg transition-transform duration-300 group hover:scale-105">
+              <img
+                className="w-full h-full object-cover rounded-lg transition-opacity duration-300 group-hover:opacity-90"
+                src={beersImage}
+                alt={beer.name}
+              />
             </div>
-          ) : (
-            <p className="text-[#6D4C41] text-lg">Aucune brasserie associée.</p>
-          )}
-        </div>
-
-        <div>
-          <h2 className="text-2xl font-semibold mb-3">Ingrédients</h2>
-          {ingredientsLoading ? (
-            <p className="text-[#6D4C41] text-lg">
-              Chargement des ingrédients...
-            </p>
-          ) : ingredientsError ? (
-            <p className="text-red-600 text-lg">{ingredientsError}</p>
-          ) : ingredients.length === 0 ? (
-            <p className="text-[#6D4C41] text-lg">
-              Aucun ingrédient trouvé pour cette bière.
-            </p>
-          ) : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {ingredients.map((ingredient) => (
-                <li
-                  key={ingredient.id_beer_ingredient}
-                  className="bg-white p-4 rounded-lg shadow border border-gray-200"
+            <div className="flex -mx-2 mt-4">
+              <div className="w-1/2 px-2">
+                <button
+                  onClick={() => navigate("/beers")}
+                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-4 rounded-full font-bold hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 transform hover:scale-105"
                 >
-                  <p className="text-lg font-semibold text-[#6D4C41]">
-                    {ingredient.name}
-                  </p>
-                  <p className="text-sm italic text-[#8D6E63]">
-                    Type : {ingredient.type}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
+                  Retour au catalogue
+                </button>
+              </div>
+              <div className="w-1/2 px-2">
+                {brewery && (
+                  <button
+                    onClick={handleNavigateToBrewery}
+                    className="w-full bg-gradient-to-r from-gray-400 to-gray-600 text-white py-2 px-4 rounded-full font-bold hover:from-gray-500 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 transform hover:scale-105"
+                  >
+                    Voir la brasserie
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
 
-      <div className="mt-8">
-        <button
-          onClick={() => navigate("/beers")}
-          className="px-6 py-3 bg-[#FFC107] text-[#4E342E] text-lg font-semibold rounded-lg shadow hover:bg-[#FFB300] transition duration-300 transform hover:scale-105"
-        >
-          Retour au catalogue
-        </button>
+          {/* Section Informations */}
+          <div className="md:flex-1 px-4 text-white">
+            <h2 className="text-4xl font-bold mb-4">{beer.name}</h2>
+            <p className="text-lg mb-6 leading-relaxed">
+              {beer.description || "Aucune description disponible."}
+            </p>
+
+            <div className="mb-6">
+              <span className="block font-bold">Taux d'alcool :</span>
+              <span className="text-xl font-medium">{beer.abv}%</span>
+            </div>
+
+            <div className="mb-6">
+              <span className="block font-bold">Catégorie :</span>
+              {categoriesLoading ? (
+                <span> Chargement...</span>
+              ) : categoriesError ? (
+                <span className="text-red-500"> {categoriesError}</span>
+              ) : (
+                <span className="text-xl font-medium">
+                  {categoryName || "Non spécifiée"}
+                </span>
+              )}
+            </div>
+
+            <div className="mb-6">
+              <span className="block font-bold">Brasserie :</span>
+              {breweryLoading ? (
+                <span> Chargement...</span>
+              ) : breweryError ? (
+                <span className="text-red-500"> {breweryError}</span>
+              ) : (
+                <span className="text-xl font-medium">
+                  {brewery?.name || "Non associée"}
+                </span>
+              )}
+            </div>
+
+            <div>
+              <span className="block font-bold">Ingrédients :</span>
+              {ingredientsLoading ? (
+                <p>Chargement...</p>
+              ) : ingredientsError ? (
+                <p className="text-red-500">{ingredientsError}</p>
+              ) : ingredients.length === 0 ? (
+                <p>Aucun ingrédient trouvé.</p>
+              ) : (
+                <ul className="mt-2 space-y-2">
+                  {ingredients.map((ingredient) => (
+                    <li
+                      key={ingredient.id_beer_ingredient}
+                      className="bg-gray-800 py-2 px-4 rounded-lg shadow-md transform transition-all hover:scale-105"
+                    >
+                      <span className="font-semibold">{ingredient.name}</span> -{" "}
+                      <span className="italic">Type : {ingredient.type}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

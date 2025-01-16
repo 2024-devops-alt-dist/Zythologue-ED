@@ -14,9 +14,9 @@ function App() {
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
-    <div className="relative flex">
+    <div className="relative flex bg-gradient-to-br from-blue-900 via-gray-900 to-black min-h-screen">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex-1 p-4 bg-gray-100 transition-all duration-300 overflow-auto">
+      <div className="flex-1  transition-all duration-300 overflow-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/beers" element={<Beers />} />

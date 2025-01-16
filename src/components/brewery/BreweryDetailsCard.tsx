@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Brewery } from "../../response/breweryResponse";
 import { useBeersByBrewery } from "../../pages/breweries/hooks/useBeersByBrewery";
+import breweryImage from "../../assets/brewery.jpg";
 
 interface BreweryDetailProps {
   brewery: Brewery;
@@ -16,98 +17,82 @@ const BreweryDetail: React.FC<BreweryDetailProps> = ({ brewery }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#E3F2FD] flex flex-col items-center py-10 px-4">
-      <div
-        className="bg-[#2196F3] text-white w-full py-8 rounded-lg shadow-md text-center animate-fadeIn"
-        aria-label={`Informations sur la brasserie ${brewery.name}`}
-      >
-        <h1 className="text-4xl font-bold">{brewery.name}</h1>
-        <p className="text-lg mt-2 font-medium">
-          Découvrez l'histoire et les bières de cette brasserie
-        </p>
-      </div>
-
-      <div className="bg-[#BBDEFB] mt-8 p-6 rounded-lg shadow-lg max-w-4xl w-full text-[#0D47A1]">
-        <h2 className="text-3xl font-semibold mb-6">Détails de la brasserie</h2>
-
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold">Pays</h3>
-          <p className="text-[#1565C0] text-lg leading-relaxed">
-            {brewery.country}
-          </p>
-        </div>
-
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold">Date de création</h3>
-          <p className="text-[#1565C0] text-lg">
-            {new Date(brewery.created_at).toLocaleDateString("fr-FR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-        </div>
-      </div>
-
-      <div className="bg-white mt-8 p-6 rounded-lg shadow-lg max-w-4xl w-full">
-        <h2 className="text-3xl font-bold mb-6 text-[#0D47A1]">
-          Bières associées
-        </h2>
-
-        {loading ? (
-          <p className="text-lg text-[#0D47A1]">Chargement des bières...</p>
-        ) : error ? (
-          <p className="text-lg text-red-500">{error}</p>
-        ) : beers.length === 0 ? (
-          <p className="text-lg text-[#0D47A1]">
-            Aucune bière associée trouvée.
-          </p>
-        ) : (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {beers.map((beer) => (
-              <li
-                key={beer.id_beer}
-                className="bg-[#BBDEFB] p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
-              >
-                <h3 className="text-xl font-semibold text-[#0D47A1]">
-                  {beer.name}
-                </h3>
-                <p className="text-[#1565C0] text-sm mt-2">
-                  {beer.description || "Pas de description disponible."}
-                </p>
+    <div className=" min-h-screen py-10 transition-all duration-300">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row -mx-4">
+          {/* Section Image */}
+          <div className="md:flex-1 px-4">
+            <div className="h-[460px] rounded-lg overflow-hidden shadow-lg transition-transform duration-300 group hover:scale-105">
+              <img
+                className="w-full h-full object-cover rounded-lg transition-opacity duration-300 group-hover:opacity-90"
+                src={breweryImage}
+                alt={brewery.name}
+              />
+            </div>
+            <div className="flex -mx-2 mt-4">
+              <div className="w-1/2 px-2">
                 <button
-                  onClick={() => handleNavigateToBeer(beer.id_beer)}
-                  className="mt-4 flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 transition duration-300"
+                  onClick={() => navigate("/breweries")}
+                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-4 rounded-full font-bold hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 transform hover:scale-105"
                 >
-                  <svg
-                    className="w-5 h-5 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 12H9m0 0l3-3m-3 3l3 3m6 9H6a2 2 0 01-2-2V6a2 2 0 012-2h9.586a2 2 0 011.414.586l4.414 4.414a2 2 0 01.586 1.414V20a2 2 0 01-2 2z"
-                    ></path>
-                  </svg>
-                  Voir les détails
+                  Retour aux brasseries
                 </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+              </div>
+            </div>
+          </div>
 
-      <div className="mt-8">
-        <button
-          onClick={() => navigate("/breweries")}
-          className="px-6 py-3 bg-[#2196F3] text-white text-lg font-semibold rounded-lg shadow hover:bg-[#1976D2] transition duration-300 transform hover:scale-105"
-        >
-          Retour aux brasseries
-        </button>
+          {/* Section Informations */}
+          <div className="md:flex-1 px-4 text-white">
+            <h2 className="text-4xl font-bold mb-4">{brewery.name}</h2>
+            <p className="text-lg mb-6 leading-relaxed">
+              Découvrez l'histoire et les bières de cette brasserie.
+            </p>
+
+            <div className="mb-6">
+              <span className="block font-bold">Pays :</span>
+              <span className="text-xl font-medium">{brewery.country}</span>
+            </div>
+
+            <div className="mb-6">
+              <span className="block font-bold">Date de création :</span>
+              <span className="text-xl font-medium">
+                {new Date(brewery.created_at).toLocaleDateString("fr-FR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold mb-4">Bières associées :</h3>
+              {loading ? (
+                <p>Chargement des bières...</p>
+              ) : error ? (
+                <p className="text-red-500">{error}</p>
+              ) : beers.length === 0 ? (
+                <p>Aucune bière associée trouvée.</p>
+              ) : (
+                <ul className="mt-2 space-y-2">
+                  {beers.map((beer) => (
+                    <li
+                      key={beer.id_beer}
+                      className="bg-gray-800 py-2 px-4 rounded-lg shadow-md transform transition-all hover:scale-105"
+                    >
+                      <span className="font-semibold">{beer.name}</span>
+                      <button
+                        onClick={() => handleNavigateToBeer(beer.id_beer)}
+                        className="ml-4 px-3 py-1 bg-gradient-to-r from-teal-500 to-green-600 text-white text-sm font-semibold rounded-lg shadow hover:from-teal-600 hover:to-green-700 transition duration-300 transform hover:scale-105"
+                      >
+                        Voir la bière
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -43,10 +43,12 @@ const BeerCard: React.FC<BeerCardProps> = ({ beer }) => {
       <div className="flex items-center justify-between px-6 py-4 bg-white rounded-b-2xl">
         <div>
           <p className="text-sm text-gray-500">
-            Taux d'alcool : <span className="font-medium text-gray-900">{beer.abv}%</span>
+            Taux d'alcool :{" "}
+            <span className="font-medium text-gray-900">{beer.abv}%</span>
           </p>
           <p className="text-sm text-gray-500">
-            Créée le : <span className="font-medium text-gray-900">{formattedDate}</span>
+            Créée le :{" "}
+            <span className="font-medium text-gray-900">{formattedDate}</span>
           </p>
         </div>
         <Link

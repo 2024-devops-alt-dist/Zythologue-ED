@@ -8,11 +8,14 @@ interface BreweryCardProps {
 }
 
 const BreweryCard: React.FC<BreweryCardProps> = ({ brewery }) => {
-  const formattedDate = new Date(brewery.created_at).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = new Date(brewery.created_at).toLocaleDateString(
+    "fr-FR",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
 
   return (
     <div className="relative flex flex-col max-w-xs overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 to-green-100 shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 transform duration-300">
@@ -43,10 +46,12 @@ const BreweryCard: React.FC<BreweryCardProps> = ({ brewery }) => {
       <div className="flex items-center justify-between px-6 py-4 bg-white rounded-b-2xl">
         <div>
           <p className="text-sm text-gray-500">
-            Pays : <span className="font-medium text-gray-900">{brewery.country}</span>
+            Pays :{" "}
+            <span className="font-medium text-gray-900">{brewery.country}</span>
           </p>
           <p className="text-sm text-gray-500">
-            Créée le : <span className="font-medium text-gray-900">{formattedDate}</span>
+            Créée le :{" "}
+            <span className="font-medium text-gray-900">{formattedDate}</span>
           </p>
         </div>
         <Link
