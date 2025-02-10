@@ -14,11 +14,10 @@ export const useDashboard = () => {
     category_id: 0,
   });
 
-  const [breweries, setBreweries] = useState<Brewery[]>([]); // Déclare que breweries est un tableau de Brewery
+  const [breweries, setBreweries] = useState<Brewery[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);  
   const [message, setMessage] = useState<string | null>(null);
 
-  // Charger les brasseries et catégories au montage du composant
   useEffect(() => {
     const fetchData = async () => {
       try {

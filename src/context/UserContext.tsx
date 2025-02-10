@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../../../utils/type/User";
 
+const EXPIRATION_TIME = 10 * 60 * 1000; 
+
 interface UserContextProps {
   currentUser: User | null;
   setCurrentUser: (user: User | null) => void;
@@ -9,29 +11,52 @@ interface UserContextProps {
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUserState] = useState<User | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setCurrentUserState(JSON.parse(storedUser));
+    const storedTimestamp = localStorage.getItem("expirationTime");
+
+    if (storedUser && storedTimestamp) {
+      const expirationTime = parseInt(storedTimestamp, 10);
+      const currentTime = Date.now();
+
+      if (currentTime < expirationTime) {
+        setCurrentUserState(JSON.parse(storedUser));
+      } else {
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("expirationTime");
+        setCurrentUserState(null);
+      }
     }
+
+    // Vérification automatique du vidage du local storage
+    const interval = setInterval(() => {
+      const storedTimestamp = localStorage.getItem("expirationTime");
+      if (storedTimestamp && Date.now() > parseInt(storedTimestamp, 10)) {
+        logout();
+      }
+    }, 30 * 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const setCurrentUser = (user: User | null) => {
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
+      localStorage.setItem("expirationTime", (Date.now() + EXPIRATION_TIME).toString());
     } else {
       localStorage.removeItem("currentUser");
+      localStorage.removeItem("expirationTime");
     }
     setCurrentUserState(user);
   };
 
   const logout = () => {
-    setCurrentUser(null);
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("expirationTime");
+    setCurrentUserState(null);
   };
 
   return (
