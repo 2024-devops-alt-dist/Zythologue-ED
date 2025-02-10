@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { User } from "../../../utils/type/User";
+import { User } from "../utils/type/User";
+
 
 const EXPIRATION_TIME = 60 * 1000;
 
