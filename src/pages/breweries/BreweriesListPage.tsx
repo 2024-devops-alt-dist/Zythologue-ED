@@ -61,7 +61,7 @@ const BreweriesPage: React.FC = () => {
           Aucune brasserie trouvée.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full animate-fade-in">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center ">
           {filteredBreweries.map((brewery) => (
             <BreweryCard key={brewery.id_brewery} brewery={brewery} />
           ))}

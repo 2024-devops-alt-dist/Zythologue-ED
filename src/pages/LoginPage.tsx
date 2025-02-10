@@ -22,6 +22,11 @@ const LoginPage: React.FC = () => {
     }
   };
 
+  // Fonction pour revenir à l'accueil
+  const handleGoHome = () => {
+    navigate("/", { replace: true });
+  };
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold text-blue-800 mb-6">Connexion</h1>
@@ -45,6 +50,12 @@ const LoginPage: React.FC = () => {
           className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
         >
           Se connecter
+        </button>
+        <button
+          onClick={handleGoHome}
+          className="w-full px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition mt-4"
+        >
+          Retour à l'accueil
         </button>
       </div>
     </div>

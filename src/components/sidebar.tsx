@@ -6,6 +6,7 @@ import {
   HiMenu,
   HiX,
   HiOfficeBuilding,
+  HiUserCircle,
 } from "react-icons/hi";
 import { FaBeer } from "react-icons/fa";
 
@@ -77,6 +78,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                 className="text-lg font-medium"
               >
                 Liste des Brasseries
+              </Link>
+            </li>
+            <li className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-700">
+              <HiUserCircle className="text-2xl" />
+              <Link
+                to="/dashboard"
+                onClick={handleLinkClick}
+                className="text-lg font-medium"
+              >
+                Dashboard Admin
               </Link>
             </li>
           </ul>

@@ -15,33 +15,30 @@ const Beers: React.FC = () => {
   } = useBeers();
 
   return (
-    <div className="p-4 min-h-screen  text-white transition-all duration-300">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-white drop-shadow-md animate-fade-in">
+    <div className="container mx-auto p-6 min-h-screen flex flex-col items-center text-white">
+      <h1 className="text-4xl font-bold text-center mb-8 drop-shadow-lg">
         Catalogue des Bières
       </h1>
 
       {/* Filtre */}
-      <div className="mb-10 flex flex-col sm:flex-row justify-center items-center gap-6 animate-slide-in">
-        <div className="relative w-full sm:w-auto">
-          <input
-            type="text"
-            value={search}
-            onChange={handleSearch}
-            placeholder="Rechercher une bière"
-            list="beerSuggestions"
-            className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg shadow-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-transform transform hover:scale-105"
-          />
-          <datalist id="beerSuggestions">
-            {beers.map((beer) => (
-              <option key={beer.id_beer} value={beer.name} />
-            ))}
-          </datalist>
-        </div>
+      <div className="w-full flex flex-wrap justify-center items-center gap-4 mb-8">
+        <input
+          type="text"
+          value={search}
+          onChange={handleSearch}
+          placeholder="Rechercher une bière"
+          list="beerSuggestions"
+          className="px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg shadow-lg focus:ring-2 focus:ring-blue-500 focus:outline-none w-full max-w-xs transition-transform transform hover:scale-105"
+        />
+        <datalist id="beerSuggestions">
+          {beers.map((beer) => (
+            <option key={beer.id_beer} value={beer.name} />
+          ))}
+        </datalist>
 
-        {/* Filtre par pourcentage */}
         <select
           onChange={handleAbvRangeChange}
-          className="w-full sm:w-auto px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg shadow-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-transform transform hover:scale-105"
+          className="px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg shadow-lg focus:ring-2 focus:ring-blue-500 focus:outline-none w-full max-w-xs transition-transform transform hover:scale-105"
         >
           <option value="">Toutes les plages (%)</option>
           <option value="0-5">0% - 5%</option>
@@ -52,11 +49,7 @@ const Beers: React.FC = () => {
       </div>
 
       {/* Affichage des bières */}
-      {error && (
-        <p className="text-red-500 text-center text-xl animate-fade-in">
-          {error}
-        </p>
-      )}
+      {error && <p className="text-red-500 text-center text-xl">{error}</p>}
       {isLoading && (
         <p className="text-gray-200 text-center text-xl animate-pulse">
           Chargement des bières...
@@ -64,7 +57,7 @@ const Beers: React.FC = () => {
       )}
 
       {!isLoading && !error && filteredBeers.length === 0 && (
-        <div className="flex flex-col items-center justify-center h-96 text-center animate-fade-in">
+        <div className="flex flex-col items-center justify-center h-96 text-center">
           <img
             src={noResultImage}
             alt="Aucune bière trouvée"
@@ -88,7 +81,7 @@ const Beers: React.FC = () => {
       )}
 
       {!isLoading && filteredBeers.length > 0 && (
-        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
           {filteredBeers.map((beer) => (
             <BeerCard key={beer.id_beer} beer={beer} />
           ))}
