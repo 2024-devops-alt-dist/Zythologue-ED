@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 import {
   HiHome,
   HiCollection,
@@ -16,6 +17,8 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
+  const { currentUser } = useUser();
+
   const handleLinkClick = () => {
     toggleSidebar();
   };
@@ -39,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       )}
 
       <div
-        className={`fixed inset-y-0 left-0 bg-gray-800 text-white w-64  transform transition-transform duration-300 z-30 ${
+        className={`fixed inset-y-0 left-0 bg-gray-800 text-white w-64 transform transition-transform duration-300 z-30 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:relative`}
       >
@@ -80,16 +83,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                 Liste des Brasseries
               </Link>
             </li>
-            <li className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-700">
-              <HiUserCircle className="text-2xl" />
-              <Link
-                to="/dashboard"
-                onClick={handleLinkClick}
-                className="text-lg font-medium"
-              >
-                Dashboard Admin
-              </Link>
-            </li>
+
+            {/* verification si utilisateur est admin pour acceder a la route  */}
+            {currentUser?.role === "admin" && (
+              <li className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-700">
+                <HiUserCircle className="text-2xl" />
+                <Link
+                  to="/dashboard"
+                  onClick={handleLinkClick}
+                  className="text-lg font-medium"
+                >
+                  Dashboard Admin
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

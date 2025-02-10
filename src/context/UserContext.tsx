@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../../../utils/type/User";
 
-const EXPIRATION_TIME = 10 * 60 * 1000; 
+const EXPIRATION_TIME = 60 * 1000;
 
 interface UserContextProps {
   currentUser: User | null;
@@ -11,7 +11,9 @@ interface UserContextProps {
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [currentUser, setCurrentUserState] = useState<User | null>(null);
 
   useEffect(() => {
@@ -31,13 +33,13 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
 
-    // Vérification automatique du vidage du local storage
+    // Vérification du vidage du local storage
     const interval = setInterval(() => {
       const storedTimestamp = localStorage.getItem("expirationTime");
       if (storedTimestamp && Date.now() > parseInt(storedTimestamp, 10)) {
         logout();
       }
-    }, 30 * 1000);
+    }, 10 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -45,7 +47,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setCurrentUser = (user: User | null) => {
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
-      localStorage.setItem("expirationTime", (Date.now() + EXPIRATION_TIME).toString());
+      localStorage.setItem(
+        "expirationTime",
+        (Date.now() + EXPIRATION_TIME).toString()
+      );
     } else {
       localStorage.removeItem("currentUser");
       localStorage.removeItem("expirationTime");
@@ -57,6 +62,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem("currentUser");
     localStorage.removeItem("expirationTime");
     setCurrentUserState(null);
+    window.location.href = "/login";
   };
 
   return (

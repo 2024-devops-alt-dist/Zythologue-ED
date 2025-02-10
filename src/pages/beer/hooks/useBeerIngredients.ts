@@ -17,13 +17,13 @@ export const useBeerIngredients = (beerId: number) => {
   useEffect(() => {
     const fetchIngredientsForBeer = async () => {
       try {
-        // Étape 1 : Récupérer les associations spécifiques à la bière
-        const beerIngredients = await fetchBeerIngredients(beerId); // Ce fetch doit filtrer uniquement par beer_id
+        // Étape 1 : Récupére les associations spécifiques à une bière
+        const beerIngredients = await fetchBeerIngredients(beerId);
 
-        // Étape 2 : Récupérer les détails des ingrédients
+        // Étape 2 : Récupére les détails des ingrédients
         const allIngredients = await getIngredients();
 
-        // Étape 3 : Filtrer et croiser les données pour ne garder que les ingrédients de la bière
+        // Étape 3 : Filtre et croiser les données pour ne garder que les ingrédients de la bière
         const detailedIngredients = beerIngredients
           .filter((beerIngredient) => beerIngredient.beer_id === beerId) // Filtrage par beer_id
           .map((beerIngredient) => {

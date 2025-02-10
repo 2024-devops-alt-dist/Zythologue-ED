@@ -53,7 +53,7 @@ const BeerCard: React.FC<BeerCardProps> = ({ beer }) => {
         </div>
         <Link
           to={`/beers/${beer.id_beer}`}
-          className="text-sm text-white bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition duration-300 whitespace-nowrap"
+          className="text-sm text-white bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition duration-300 whitespace-nowrap"
         >
           Voir les détails
         </Link>
