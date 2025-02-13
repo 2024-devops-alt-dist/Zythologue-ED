@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Sidebar from "./components/sidebar";
+import Sidebar from "./components/Sidebar";
 import { UserProvider } from "./context/UserContext";
 import routes from "./routes/routes"; 
 

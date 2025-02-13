@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Beer } from "../../response/beerResponse";
 import { useBrewery } from "../../pages/beer/hooks/useBrewery";
@@ -28,9 +28,11 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
     error: categoriesError,
   } = useCategories();
 
-  const categoryName = categories.find(
-    (category) => category.id_category === beer.category_id
-  )?.name;
+  const categoryName = useMemo(() => {
+    return categories.find(
+      (category) => category.id_category === beer.category_id
+    )?.name;
+  }, [categories, beer.category_id]);
 
   const handleNavigateToBrewery = () => {
     if (brewery) {
@@ -49,6 +51,7 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
                 className="w-full h-full object-cover rounded-lg transition-opacity duration-300 group-hover:opacity-90"
                 src={beersImage}
                 alt={beer.name}
+                aria-label={`Image de ${beer.name}`}
               />
             </div>
             <div className="flex -mx-2 mt-4">
@@ -56,6 +59,7 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
                 <button
                   onClick={() => navigate("/beers")}
                   className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-4 rounded-full font-bold hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 transform hover:scale-105"
+                  aria-label="Retour au catalogue"
                 >
                   Retour au catalogue
                 </button>
@@ -65,6 +69,7 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
                   <button
                     onClick={handleNavigateToBrewery}
                     className="w-full bg-gradient-to-r from-gray-400 to-gray-600 text-white py-2 px-4 rounded-full font-bold hover:from-gray-500 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 transform hover:scale-105"
+                    aria-label="Voir la brasserie"
                   >
                     Voir la brasserie
                   </button>
@@ -140,4 +145,4 @@ const BeerDetail: React.FC<BeerDetailProps> = ({ beer }) => {
   );
 };
 
-export default BeerDetail;
+export default React.memo(BeerDetail);

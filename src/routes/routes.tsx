@@ -8,7 +8,7 @@ import LoginPage from "../pages/LoginPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Dashboard from "../pages/admin/Dashboard";
 import Unauthorized from "../pages/admin/Unauthorized";
-import Home from "../components/home";
+import Home from "../components/Home";
 
 
 const routes = (
