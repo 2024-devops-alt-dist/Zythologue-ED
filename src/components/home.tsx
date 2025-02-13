@@ -81,7 +81,7 @@ const Home: React.FC = () => {
               onClick={handleViewBeers}
               className="px-6 py-3 bg-yellow-500 text-black font-bold rounded-lg shadow-lg hover:bg-yellow-600 transition-all duration-300"
             >
-              🚀 Voir le Catalogue
+              Voir le Catalogue
             </motion.button>
           </motion.div>
 
@@ -102,7 +102,7 @@ const Home: React.FC = () => {
               onClick={handleViewBreweries}
               className="px-6 py-3 bg-blue-500 text-black font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300"
             >
-              🔥 Explorer les Brasseries
+              Explorer les Brasseries
             </motion.button>
           </motion.div>
         </div>
