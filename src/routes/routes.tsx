@@ -11,7 +11,6 @@ import Unauthorized from "../pages/admin/Unauthorized";
 import Home from "../components/home";
 
 
-
 const routes = (
 <>
     <Route path="/" element={<PageTransition><Home/></PageTransition>} />
